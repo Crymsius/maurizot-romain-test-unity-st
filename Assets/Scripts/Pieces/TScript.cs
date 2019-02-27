@@ -4,8 +4,4 @@ using UnityEngine;
 
 public class TScript : PieceScript {
 
-	public override void PieceRotation(float rotation) {
-		gameObject.transform.GetChild(0).Rotate(new Vector3(0,0,rotation));
-		return;
-	}
 }

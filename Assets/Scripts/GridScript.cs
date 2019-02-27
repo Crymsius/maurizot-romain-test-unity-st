@@ -31,16 +31,13 @@ public class GridScript : MonoBehaviour {
 
 		spawner = GameObject.Find("Spawner");
 	}
-	
+
+
 	public bool IsTranslateOk (Vector3Int move, Vector3Int[] tiles) {
 		for (int i = 0; i < 4; i++)
 		{
 			int tilePositionHorizontal = move.x + tiles[i].x;
 			int tilePositionVertical = move.y+ tiles[i].y;
-
-			// Debug.Log("origin: " + origin);
-			// Debug.Log("x: "+tilePositionHorizontal);
-			// Debug.Log("y: "+tilePositionVertical);
 
 			if (tilePositionHorizontal >= gridWitdh || tilePositionHorizontal < 0 || tilePositionVertical < 0) {
 				Debug.Log("out of bounds");
@@ -54,6 +51,7 @@ public class GridScript : MonoBehaviour {
 		// Debug.Log("everything is clear");
 		return true;
 	}
+
 
 	public void PutPiece(Vector3Int origin, Vector3Int[] tilesPositions, Transform[] tilesObjects) {
 		for (int i = 0; i < 4; i++)

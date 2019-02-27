@@ -61,7 +61,6 @@ public class PieceScript : MonoBehaviour {
 			float rotation = 90f * direction;
 
 			//if possible
-			// gameObject.transform.GetChild(0).Rotate(new Vector3(0,0,rotation));
 			PieceRotation(rotation);
 		}
 	}
@@ -112,7 +111,22 @@ public class PieceScript : MonoBehaviour {
 		return tiles;
 	}
 
-	public virtual void PieceRotation(float rotation) {}
+	public virtual void PieceRotation(float rotation) {
+		gameObject.transform.GetChild(0).Rotate(new Vector3(0,0,rotation));
+		Vector3Int[] tilesCoordinates = GetPieceTiles();
+		if (! grid.GetComponent<GridScript>().IsTranslateOk(Vector3Int.zero, tilesCoordinates)) {
+			if (!grid.GetComponent<GridScript>().IsTranslateOk(Vector3Int.right* (int)Mathf.Sign(rotation), tilesCoordinates)) {
+				if (!grid.GetComponent<GridScript>().IsTranslateOk(Vector3Int.up, tilesCoordinates)) {
+					gameObject.transform.GetChild(0).Rotate(new Vector3(0,0,-rotation));
+				} else{
+					gameObject.transform.Translate(Vector3.up);
+				}
+			} else {
+				gameObject.transform.Translate(Vector3.right* Mathf.Sign(rotation));
+			}
+		}
+
+	}
 
 
 	void StoreTiles() {
