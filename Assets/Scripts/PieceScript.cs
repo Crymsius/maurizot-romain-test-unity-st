@@ -32,7 +32,7 @@ public class PieceScript : MonoBehaviour {
 		if ( timeRemainingVertical < 0 )
 		{
 			GoDown();
-			timeRemainingVertical = 1/verticalSpeed;
+			timeRemainingVertical = 1/GameObject.Find("GameManager").GetComponent<GameManager>().GetCurrentSpeed();
 		}
 
 

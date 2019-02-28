@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	int lines;
 	int time;
 	int[] tableScore;
+	float[] tableSpeedLevel;
 
 	GameObject overlayPanel;
 	GameObject pausePanel;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour {
 	Text scoreDisplay;
 	Text linesDisplay;
 	Text timeDisplay;
+
+	
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +51,21 @@ public class GameManager : MonoBehaviour {
 		tableScore[1]=100;
 		tableScore[2]=300;
 		tableScore[3]=1200;
+
+		tableSpeedLevel = new float[10];
+		tableSpeedLevel[0]=1f;
+		tableSpeedLevel[1]=2f;
+		tableSpeedLevel[2]=5f;
+		tableSpeedLevel[3]=8f;
+		tableSpeedLevel[4]=10f;
+		tableSpeedLevel[5]=12f;
+		tableSpeedLevel[6]=14f;
+		tableSpeedLevel[7]=16f;
+		tableSpeedLevel[8]=18f;
+		tableSpeedLevel[9]=20f;
+
+		InvokeRepeating("UpdateTime", 0f, 1f);
+		InvokeRepeating("IncreaseLevel", 5f, 5f);
 	}
 
 	// Update is called once per frame
@@ -57,8 +75,6 @@ public class GameManager : MonoBehaviour {
 			overlayPanel.SetActive(true);
 			pausePanel.SetActive(true);
 		}
-		
-		InvokeRepeating("UpdateTime", 0f, 1f);
 	}
 
 	public void Pause() {
@@ -76,7 +92,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void IncreaseLevel() {
-		level++;
+		if (level < 9) {
+			level++;
+			UpdateDisplay();
+		}
 	}
 
 	public void IncreaseScore(int m_lines) {
@@ -97,4 +116,8 @@ public class GameManager : MonoBehaviour {
 		timeDisplay.text = time.ToString();
 	}
 
+
+	public float GetCurrentSpeed() {
+		return tableSpeedLevel[level];
+	}
 }
