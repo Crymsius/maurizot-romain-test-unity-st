@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour {
 		tableSpeedLevel[8]=18f;
 		tableSpeedLevel[9]=20f;
 
+		Time.timeScale = 1;
 		InvokeRepeating("UpdateTime", 0f, 1f);
 		InvokeRepeating("IncreaseLevel", 5f, 5f);
 	}
@@ -78,11 +79,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Pause() {
+		Time.timeScale = 0;
 		Debug.Log("paused game");
 	}
 
-	public void NewGame() {
-		Debug.Log("new game");
+	public void Resume() {
+		Time.timeScale = 1;
 	}
 
 	public void GameOver() {
