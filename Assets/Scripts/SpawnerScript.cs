@@ -12,7 +12,9 @@ public class SpawnerScript : MonoBehaviour {
 
 	public void SpawnNewPiece() {
 		int id = Random.Range(0, 7);
+		
 		GameObject.Instantiate(pieceArray[id], gameObject.transform.position, Quaternion.identity);
+
 	}
 
 

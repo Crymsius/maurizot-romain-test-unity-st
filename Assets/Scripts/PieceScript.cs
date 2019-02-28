@@ -15,11 +15,13 @@ public class PieceScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
 		grid = GameObject.Find("Grid");
-		verticalSpeed = 1f;
+		verticalSpeed = 4f;
 		horizontalSpeed = 1f;
-		timeRemainingVertical = verticalSpeed;
+		timeRemainingVertical = 1/verticalSpeed;
 		timeRemainingFreeze = 2f;
+		isGameOver();
 	}
 	
 	// Update is called once per frame
@@ -30,7 +32,7 @@ public class PieceScript : MonoBehaviour {
 		if ( timeRemainingVertical < 0 )
 		{
 			GoDown();
-			timeRemainingVertical = verticalSpeed;
+			timeRemainingVertical = 1/verticalSpeed;
 		}
 
 
@@ -126,6 +128,12 @@ public class PieceScript : MonoBehaviour {
 			}
 		}
 
+	}
+
+	void isGameOver() {
+		if (!grid.GetComponent<GridScript>().IsTranslateOk(Vector3Int.zero, GetPieceTiles())){
+			GameObject.Find("GameManager").GetComponent<GameManager>().GameOver();
+		}
 	}
 
 

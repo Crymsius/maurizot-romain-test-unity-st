@@ -92,6 +92,7 @@ public class GridScript : MonoBehaviour {
 		}
 		if (start >= 0) {
 			EraseLine(start,end);
+			GameObject.Find("GameManager").GetComponent<GameManager>().IncreaseScore(end-start+1);
 		}
 	}
 
