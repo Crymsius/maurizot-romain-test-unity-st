@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -80,7 +81,6 @@ public class GameManager : MonoBehaviour {
 
 	public void Pause() {
 		Time.timeScale = 0;
-		Debug.Log("paused game");
 	}
 
 	public void Resume() {
@@ -88,9 +88,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		Debug.Log("game over");
+		Time.timeScale = 0;
 		overlayPanel.SetActive(true);
 		gameOverPanel.SetActive(true);
+		PlayerPrefs.SetInt("LastScore", score);
+		SceneManager.LoadScene ("LeaderboardScene");
 	}
 
 	public void IncreaseLevel() {
@@ -117,7 +119,6 @@ public class GameManager : MonoBehaviour {
 		time = (int)Time.time;
 		timeDisplay.text = time.ToString();
 	}
-
 
 	public float GetCurrentSpeed() {
 		return tableSpeedLevel[level];
