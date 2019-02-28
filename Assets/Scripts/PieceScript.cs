@@ -20,7 +20,7 @@ public class PieceScript : MonoBehaviour {
 		verticalSpeed = 4f;
 		horizontalSpeed = 1f;
 		timeRemainingVertical = 1/verticalSpeed;
-		timeRemainingFreeze = 2f;
+		timeRemainingFreeze = 0.2f;
 		isGameOver();
 	}
 	
@@ -73,14 +73,15 @@ public class PieceScript : MonoBehaviour {
 		if (grid.GetComponent<GridScript>().IsTranslateOk(move, GetPieceTiles())) {
 			gameObject.transform.Translate(Vector3.down);
 		} else {
-		// timeRemainingFreeze -= Time.deltaTime;
-		// 	if ( timeRemainingFreeze < 0 )
-		// 	{
+		timeRemainingFreeze -= Time.deltaTime;
+		Debug.Log(timeRemainingFreeze);
+			if ( timeRemainingFreeze < 0 )
+			{
 				Vector3Int currentOrigin = Vector3Int.FloorToInt(transform.position);
 				grid.GetComponent<GridScript>().PutPiece(currentOrigin, GetPieceTiles(), GetPieceTilesTransform());
-				// this.GetComponent<PieceScript>().enabled = false;
+				this.GetComponent<PieceScript>().enabled = false;
 				StoreTiles();
-			// }
+			}
 		}
 	}
 
